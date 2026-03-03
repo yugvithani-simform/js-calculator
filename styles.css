@@ -81,9 +81,8 @@ body{
     transition: 0.2s;
 }
 
-.btn sup {
-  font-size: 0.7em;
-  vertical-align: super;
+.btn sup, .btn sub{
+    font-size: 0.7em;
 }
 
 .number{
