@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         crossorigin="anonymous">
-    <script type="module" src="./js/main.js" defer></script>
+    <script type="module" src="./src/main.js" defer></script>
     <title>JS Calculator</title>
 </head>
 
@@ -17,8 +17,8 @@
             <div class="title">Calculator</div>
             <div class="line"></div>
             <div class="displayArea">
-                <div class="previousExpression">
-                    exp
+                <div id="previousExpression" class="previousExpression">
+                    0
                 </div>
                 <input id="displayArea-input" type="text" readonly value="0">
             </div>
@@ -33,12 +33,12 @@
                 <button class="btn" data-value="tan">tan</button>
                 <button id="angleMode" class="btn" data-value="deg"><span>DEG</span><sub>/RED</sub></button>
 
-                <button class="btn" data-value="sqrt">√</button>
+                <button class="btn" data-value="√">√</button>
                 <button class="btn" data-value="log">log</button>
                 <button class="btn" data-value="ln">ln</button>
                 <button class="btn" data-value="1/x">1/x</button>
 
-                <button class="btn" data-value="pi">π</button>
+                <button class="btn" data-value="π">π</button>
                 <button class="btn" data-value="e">e</button>
                 <button class="btn" data-value="x^y">x<sup>y</sup></button>
                 <button class="btn " data-value="n!">n!</button>

@@ -51,6 +51,7 @@ body{
     height: auto;
     font-size: 28px;
     text-align: right;
+    overflow-x: auto;
     padding: 0 10px;
     border: none;
     background: #d1d1d1;

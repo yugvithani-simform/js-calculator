@@ -1,3 +1,5 @@
+import tokenizer from "./tokenizer.js";
+
 export default class Calculator {
     constructor() {
         this.expression = '';
@@ -16,7 +18,12 @@ export default class Calculator {
 
     calculate(){
         try {
-            this.result = eval(this.expression);
+            let tokens = tokenizer(this.expression);
+            console.log(tokens)
+            let postfixExp = postfix(tokens); 
+            console.log(postfixExp)
+            // this.result = evaluate(postfixExp);
+            // this.expression = this.result;
         } catch (e) {
             this.result = 'Error';
         }
