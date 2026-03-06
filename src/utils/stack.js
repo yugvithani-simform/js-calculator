@@ -23,6 +23,10 @@ export default class Stack{
         return res;
     }
 
+    toArray(){
+        return this.#arr
+    }
+
     isEmpty(){
         return !(this.#arr.length)
     }

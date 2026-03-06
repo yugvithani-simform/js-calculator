@@ -1,3 +1,4 @@
+import postfix from "./postfix.js";
 import tokenizer from "./tokenizer.js";
 
 export default class Calculator {

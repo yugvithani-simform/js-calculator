@@ -48,11 +48,11 @@ const operators = {
     },
     '(':{
         tokenString: '(',
-        precedence: 10
+        precedence: 1
     },
     ')':{
         tokenString: ')',
-        precedence: 10
+        precedence: 1
     }
 }
 

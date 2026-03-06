@@ -1,7 +1,7 @@
 import { constants, operators, functions } from "./operations.js";
 
 export default function tokenizer(exp){
-    const arr = [];
+    const tokens = [];
     let i = 0, len = exp.length;
     while(i<len){
         let currentInput = '';
@@ -19,9 +19,9 @@ export default function tokenizer(exp){
         // else if(isLetter(exp[i])){
             
         // }
-        arr.push(currentInput);
+        tokens.push(currentInput);
     }
-    return arr;
+    return tokens;
 }
 
 function isDigit(x){
