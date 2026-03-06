@@ -10,15 +10,9 @@ export default function tokenizer(exp){
                 currentInput += exp[i++];
             }
         } 
-        // else if(isConstant(exp[i])){
-        //     currentInput += constants[exp[i++]].value
-        // }
         else if(isOperator(exp[i])){
             currentInput += operators[exp[i++]].tokenString
         }
-        // else if(isLetter(exp[i])){
-            
-        // }
         tokens.push(currentInput);
     }
     return tokens;

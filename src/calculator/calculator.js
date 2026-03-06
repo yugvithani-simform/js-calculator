@@ -1,3 +1,4 @@
+import evaluatePostfix from "./evaluatePostfix.js";
 import postfix from "./postfix.js";
 import tokenizer from "./tokenizer.js";
 
@@ -19,14 +20,13 @@ export default class Calculator {
 
     calculate(){
         try {
-            let tokens = tokenizer(this.expression);
-            console.log(tokens)
-            let postfixExp = postfix(tokens); 
-            console.log(postfixExp)
-            // this.result = evaluate(postfixExp);
-            // this.expression = this.result;
+            let tokens = tokenizer(this.expression); // return arr
+            let postfixExp = postfix(tokens); // return stack
+            this.result = evaluatePostfix(postfixExp)
+            this.expression = this.result;
         } catch (e) {
             this.result = 'Error';
+            this.expression = this.result
         }
     }
 }

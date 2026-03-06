@@ -4,8 +4,6 @@ export default class Stack{
     #arr = [];
 
     push(ele){
-        if(typeof ele !== 'string')
-            showError('type of passed element is not string')
         this.#arr.push(ele);
     }
 
@@ -29,6 +27,11 @@ export default class Stack{
 
     isEmpty(){
         return !(this.#arr.length)
+    }
+
+    doReverse(){
+        this.#arr.reverse();
+        return;
     }
 
     clear(){

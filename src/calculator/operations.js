@@ -1,7 +1,7 @@
 import { showError } from "../utils/showError.js"
 
 const constants = {
-    'pi':{
+    'π':{
         value: 3.1415
     },
     'e':{
@@ -13,31 +13,31 @@ const operators = {
     '+':{
         tokenString: '+',
         precedence: 5,
-        airty: 2,
+        arity: 2,
         execute: (a,b) => a+b 
     },
     '-':{
         tokenString: '-',
         precedence: 5,
-        airty: 2,
+        arity: 2,
         execute: (a,b) => a-b
     },
     '*':{
         tokenString: '*',
         precedence: 6,
-        airty: 2,
+        arity: 2,
         execute: (a,b) => a*b
     },
     '/':{
         tokenString: '/',
         precedence: 6,
-        airty: 2,
+        arity: 2,
         execute: (a,b) => b==0 ? showError("Can't devide by zero") : a/b
     },
     '%':{
         tokenString: '%',
         precedence: 6,
-        airty: 2,
+        arity: 2,
         execute: (a,b) => a%b
     },
     '^':{
@@ -60,7 +60,7 @@ const functions = {
     '+/-':{
         tokenString: 'swapSign',
         precedence: 4,
-        airty: 1,
+        arity: 1,
         execute: function (a){
             return -a;
         }
@@ -104,7 +104,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a) {
-            if((typeof a !== 'number') || a<0)
+            if(a<0)
                 showError('Please enter the valid number')
             return Math.log10(a);
         }
@@ -114,7 +114,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a) {
-            if((typeof a !== 'number') || a<0)
+            if(a<0)
                 showError('Please enter the valid number')
             return Math.log(a);
         }
@@ -124,7 +124,7 @@ const functions = {
         precedence: 8,
         arity: 1,
         execute: (a) => {
-            if((typeof a !== 'number') || (Math.floor(a) !== a) || a<=0)
+            if((Math.floor(a) !== a) || a<=0)
                 showError('Please enter the natural number')
             let fact = 1;
             for(let i=2; i<=a; i++){
@@ -138,7 +138,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: (a) => {
-            if((typeof a !== 'number') || a<0)
+            if(a<0)
                 showError('please enter the valid number')
             return Math.sqrt(a);
         }

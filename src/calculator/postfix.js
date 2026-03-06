@@ -24,5 +24,5 @@ export default function postfix(tokens){
     while(temp.length){
         stack.push(temp.pop())
     }
-    return stack.toArray();
+    return stack;
 }
