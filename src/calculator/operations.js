@@ -143,7 +143,7 @@ const functions = {
             return Math.sqrt(a);
         }
     },
-    '1/x':{
+    'INV':{
         tokenString: 'INV',
         arity: 1,
         execute: (a) => {
