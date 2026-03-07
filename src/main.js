@@ -43,7 +43,7 @@ function handleInput(value){
         calculator.setExpression(calculator.result);
     }
     else {
-        if(calculator.expression === '0' || calculator.expression === 'Error')
+        if((calculator.expression === '0' && value !== '.') || calculator.expression === 'Error')
             calculator.setExpression('')
         calculator.setExpression(calculator.expression + value);
     }

@@ -1,10 +1,11 @@
 import Stack from '../utils/stack.js';
-import { operators } from './operations.js';
+import { operators, functions } from './operations.js';
 
 export default function postfix(tokens){
     const stack = new Stack();
     const temp = [];
     for(let token of tokens){
+        
         if(!isNaN(token))
             stack.push(token);
         else if(token === '(')
@@ -15,7 +16,9 @@ export default function postfix(tokens){
             temp.pop()
         }
         else{
-            while(temp.length && operators[temp[temp.length-1]].precedence >= operators[token].precedence){
+            let curr = operators[token] ?? functions[token];
+            let top = operators[temp[temp.length-1]] ?? functions[temp[temp.length-1]] ?? {precedence: -1};
+            while(temp.length && top.precedence >= curr.precedence){
                 stack.push(temp.pop());
             }
             temp.push(token);

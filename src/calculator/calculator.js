@@ -4,7 +4,7 @@ import tokenizer from "./tokenizer.js";
 
 export default class Calculator {
     constructor() {
-        this.expression = '';
+        this.expression = '0';
         this.result = 0;
         this.angleMode = "DEG";
     }
@@ -22,8 +22,8 @@ export default class Calculator {
         try {
             let tokens = tokenizer(this.expression); // return arr
             let postfixExp = postfix(tokens); // return stack
-            this.result = evaluatePostfix(postfixExp)
-            this.expression = this.result;
+            this.result = evaluatePostfix(postfixExp, this.angleMode);
+            this.expression = `${this.result}`;
         } catch (e) {
             this.result = 'Error';
             this.expression = this.result

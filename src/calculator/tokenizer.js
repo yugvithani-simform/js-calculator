@@ -1,19 +1,40 @@
+import { showError } from "../utils/showError.js";
 import { constants, operators, functions } from "./operations.js";
 
 export default function tokenizer(exp){
     const tokens = [];
     let i = 0, len = exp.length;
+    let bracketCount = 0;
     while(i<len){
         let currentInput = '';
         if(isDigit(exp[i])){
             while(i<len && isDigit(exp[i])){
                 currentInput += exp[i++];
             }
-        } 
+        }
+        else if(isConstant(exp[i])){
+            currentInput += constants[exp[i++]].value
+        }
+        else if(isLetter(exp[i])){
+            while(i<len && isLetter(exp[i])){
+                currentInput += exp[i++];
+            }
+        }
         else if(isOperator(exp[i])){
+            //update the no of bracket
+            if(exp[i] === '('){
+                bracketCount++;
+            }
+            else if(exp[i] === ')'){
+                bracketCount--;
+            }
+
             currentInput += operators[exp[i++]].tokenString
         }
         tokens.push(currentInput);
+    }
+    if(bracketCount !== 0){
+        showError("Mismatched brackets");
     }
     return tokens;
 }

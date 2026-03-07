@@ -1,21 +1,24 @@
 import Stack from "../utils/stack.js";
-import { operators } from "./operations.js";
+import { operators, functions } from "./operations.js";
 
-export default function evaluatePostfix(stack){
+export default function evaluatePostfix(stack, angleMode){
     let outputStack = new Stack()
     stack.doReverse();
     while(!stack.isEmpty()){
         if(!isNaN(stack.peek())){
             outputStack.push(stack.pop());
         }
-        else if(operators[stack.peek()].arity === 2){
+        else{
             let op2 = Number(outputStack.pop());
-            let op1 = Number(outputStack.pop());
-            outputStack.push(operators[stack.pop()].execute(op1, op2));
-        }
-        else if(operators[stack.peek()].arity === 1){
-            let op = Number(outputStack.pop());
-            outputStack.push(operators[stack.pop()].execute(op));
+            let currOperation = operators[stack.peek()] ?? functions[stack.peek()];
+            stack.pop();
+            if(currOperation.arity === 2){
+                let op1 = Number(outputStack.pop());
+                outputStack.push(currOperation.execute(op1, op2));
+            }
+            else if(currOperation.arity === 1){
+                outputStack.push(currOperation.execute(op2, angleMode));
+            }
         }
     }
     return outputStack.pop();
