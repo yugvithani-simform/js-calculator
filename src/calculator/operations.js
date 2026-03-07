@@ -2,10 +2,10 @@ import { showError } from "../utils/showError.js"
 
 const constants = {
     'π':{
-        value: 3.1415
+        value: Math.PI
     },
     'e':{
-        value: 2.718
+        value: Math.E
     }
 }
 
@@ -73,7 +73,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a, mode) {
-            angle = mode === 'DEG' ? a*180/constants['pi'] : a;
+            let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
             return Math.sin(angle) // in radians
         }
     },
@@ -82,7 +82,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a, mode) {
-            angle = mode === 'DEG' ? a*180/constants['pi'] : a;
+            let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
             return Math.cos(angle) // in radians
         }
     },
@@ -91,8 +91,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a, mode) {
-            angle = mode === 'DEG' ? a*180/constants['pi'] : a;
-
+            let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
             let cosVal = Math.cos(angle);
             if(cosVal < 1e-10)
                 showError('tan value goes infinte')
@@ -146,6 +145,7 @@ const functions = {
     'INV':{
         tokenString: 'INV',
         arity: 1,
+        precedence: 9,
         execute: (a) => {
             if(a===0)
                 showError("can't divide by zero")
