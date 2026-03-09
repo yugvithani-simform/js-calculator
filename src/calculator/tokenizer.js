@@ -20,6 +20,9 @@ export default function tokenizer(exp){
                 currentInput += exp[i++];
             }
         }
+        else if(exp[i] === '!'){
+            currentInput += functions[exp[i++]].tokenString;
+        }
         else if(isOperator(exp[i])){
             //update the No of bracket
             if(exp[i] === '('){
