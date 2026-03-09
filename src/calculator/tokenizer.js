@@ -5,17 +5,14 @@ export default function tokenizer(exp){
     const tokens = [];
     let i = 0, len = exp.length;
     let bracketCount = 0;
-    let lastTokenIsConstant = false;
     while(i<len){
         let currentInput = '';
-        let currIsConstant = false;
         if(isDigit(exp[i])){
             while(i<len && isDigit(exp[i])){
                 currentInput += exp[i++];
             }
         }
         else if(isConstant(exp[i])){
-            currIsConstant = true;
             currentInput += constants[exp[i++]].value
         }
         else if(isLetter(exp[i])){
@@ -42,7 +39,7 @@ export default function tokenizer(exp){
                 functions['!'].tokenString,
             ].includes(lastToken)) ||
             !(isNaN(lastToken)) ||
-            (lastTokenIsConstant)
+            (Object.values(constants).some(x => `${x.value}` === lastToken))
         ) &&
         (
             ([
@@ -54,13 +51,11 @@ export default function tokenizer(exp){
                 functions['ln'].tokenString,
                 functions['√'].tokenString
             ].includes(currentInput)) ||
-            (currIsConstant)
+            (Object.values(constants).some(x => `${x.value}` === currentInput))
         );
         if(lastToken && implicitMultiplication){
             tokens.push('*');
         }
-
-        lastTokenIsConstant = currIsConstant;
 
         tokens.push(currentInput);
     }
