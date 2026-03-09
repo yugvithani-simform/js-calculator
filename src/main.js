@@ -20,18 +20,18 @@ btns.forEach(btn => {
 
 function handleInput(value){
     if(value === 'CE'){
-        calculator.setExpression('0');
+        updateExpression('0');
     }
     else if(value === 'DEL'){
         if(calculator.expression.length <= 1)
-            calculator.setExpression('0')
+            updateExpression('0')
         else
-            calculator.setExpression(calculator.expression.slice(0, -1));
+            updateExpression(calculator.expression.slice(0, -1));
     }
     else if(value === '='){
         previousExpression.textContent = calculator.expression
         calculator.calculate();
-        calculator.setExpression(calculator.result);
+        updateExpression(calculator.expression);
     }
     else if(value === 'deg' || value === 'rad'){
         const angleModeBtn = document.getElementById('angleMode');
@@ -39,10 +39,19 @@ function handleInput(value){
         angleModeBtn.innerHTML = calculator.angleMode + "<sub>" + (calculator.angleMode === "DEG" ? "/RAD" : "/DEG") + "</sub>";
         angleModeBtn.dataset.value = calculator.angleMode === "DEG" ? "deg" : "rad";
     }
+    else if(value === 'Ans'){
+        if(calculator.expression === '0' || calculator.hasError){
+            updateExpression('')
+            calculator.hasError=false;
+        }
+        updateExpression(calculator.expression + `${calculator.result}`)
+    }
     else {
-        if((calculator.expression === '0' && value !== '.') || calculator.expression === 'Error')
-            calculator.setExpression('')
-        calculator.setExpression(calculator.expression + value);
+        if((calculator.expression === '0' && value !== '.') || calculator.hasError){
+            updateExpression('')
+            calculator.hasError=false;
+        }
+        updateExpression(calculator.expression + value);
     }
     render();
 }
@@ -50,4 +59,9 @@ function handleInput(value){
 function render(){
     input.value = calculator.expression;
     input.scrollLeft = input.scrollWidth;
+}
+
+function updateExpression(exp) {
+    calculator.expression = exp;
+    document.getElementById('displayArea-input').value = exp;
 }
