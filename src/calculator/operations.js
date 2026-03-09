@@ -43,7 +43,7 @@ const operators = {
     },
     '^':{
         tokenString: '^',
-        precedence: 7,
+        precedence: 8,
         arity: 2,
         execute: (a,b) => Math.pow(a, b)
     },
@@ -68,13 +68,15 @@ const functions = {
     },
     '-':{
         tokenString: 'u-',
+        precedence: 7
     },
     '+':{
-        tokenString: 'u+'
+        tokenString: 'u+',
+        precedence: 7
     },
     'sin':{
         tokenString: 'sin',
-        precedence: 9,
+        precedence: 10,
         arity: 1,
         execute: function (a, mode) {
             let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
@@ -84,7 +86,7 @@ const functions = {
     },
     'cos':{
         tokenString: 'cos',
-        precedence: 9,
+        precedence: 10,
         arity: 1,
         execute: function (a, mode) {
             let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
@@ -94,7 +96,7 @@ const functions = {
     },
     'tan':{
         tokenString: 'tan',
-        precedence: 9,
+        precedence: 10,
         arity: 1,
         execute: function (a, mode) {
             let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
@@ -106,7 +108,7 @@ const functions = {
     },
     'log':{
         tokenString: 'log',
-        precedence: 9,
+        precedence: 10,
         arity: 1,
         execute: function (a) {
             if(a<=0)
@@ -116,7 +118,7 @@ const functions = {
     },
     'ln':{
         tokenString: 'ln',
-        precedence: 9,
+        precedence: 10,
         arity: 1,
         execute: function (a) {
             if(a<=0)
@@ -126,7 +128,7 @@ const functions = {
     },
     '!':{
         tokenString: '!',
-        precedence: 8,
+        precedence: 9,
         arity: 1,
         execute: (a) => {
             if((Math.floor(a) !== a) || a<=0)
@@ -140,7 +142,7 @@ const functions = {
     },
     '√':{
         tokenString: '√',
-        precedence: 9,
+        precedence: 10,
         arity: 1,
         execute: (a) => {
             if(a<0)
@@ -151,7 +153,7 @@ const functions = {
     'INV':{
         tokenString: 'INV',
         arity: 1,
-        precedence: 9,
+        precedence: 10,
         execute: (a) => {
             if(a===0)
                 showError("can't divide by zero")
