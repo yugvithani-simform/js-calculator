@@ -24,6 +24,33 @@ export default function tokenizer(exp){
             currentInput += functions[exp[i++]].tokenString;
         }
         else if(isOperator(exp[i])){
+            // unary operator handler
+            let lastToken = tokens.length > 0 ? tokens[tokens.length-1] : null;
+            let isUnary = ((exp[i] === '-' || exp[i] === '+') &&        // check current expression is the unary or not
+            (
+                !tokens.length ||       // in starting       
+                    isOperator(lastToken) ||        // lastToken is operator
+                    (lastToken === '(')     // lastToken is '('
+                )
+            );
+            if(isUnary){
+                i++;        //skip '-' or '+' and ignore the + sign as unary
+                if(exp[i-1] === '-'){
+                    if(lastToken === '^'){      // extra condition ((i<len && isDigit(exp[i])) || )
+                        let num = '-';
+                        while(i<len && isDigit(exp[i])){
+                            num += exp[i++];
+                        }
+                        tokens.push(num);
+                    }
+                    else{
+                        tokens.push('-1');
+                        tokens.push('*')
+                    }
+                }
+                continue;
+            }
+            
             //update the No of bracket
             if(exp[i] === '('){
                 bracketCount++;
@@ -65,7 +92,6 @@ export default function tokenizer(exp){
     if(bracketCount !== 0){
         showError("Mismatched brackets");
     }
-    
     return tokens;
 }
 

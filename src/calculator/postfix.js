@@ -22,7 +22,7 @@ export default function postfix(tokens){
                 top = operators[temp[temp.length-1]] ?? functions[temp[temp.length-1]] ?? {precedence: -1};
             }
             temp.push(token);
-        }
+        }        
     }
     while(temp.length){
         stack.push(temp.pop())
