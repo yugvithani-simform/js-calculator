@@ -1,4 +1,5 @@
 import { showError } from "../utils/showError.js"
+import tokenizer from "./tokenizer.js";
 
 const constants = {
     'π':{
@@ -66,7 +67,10 @@ const functions = {
         }
     },
     '-':{
-        tokenString: 'NEG',
+        tokenString: 'u-',
+    },
+    '+':{
+        tokenString: 'u+'
     },
     'sin':{
         tokenString: 'sin',
@@ -105,7 +109,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a) {
-            if(a<0)
+            if(a<=0)
                 showError('Please enter the valid number')
             return Math.log10(a);
         }
@@ -115,7 +119,7 @@ const functions = {
         precedence: 9,
         arity: 1,
         execute: function (a) {
-            if(a<0)
+            if(a<=0)
                 showError('Please enter the valid number')
             return Math.log(a);
         }
