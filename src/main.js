@@ -2,14 +2,6 @@ import Calculator from "./calculator/calculator.js";
 
 const calculator = new Calculator();
 
-// Event listener for angle mode toggle
-const angleModeBtn = document.getElementById('angleMode');
-angleModeBtn.addEventListener('click', () => {
-    calculator.toggleAngleMode();
-    angleModeBtn.innerHTML = calculator.angleMode + "<sub>" + (calculator.angleMode === "DEG" ? "/RAD" : "/DEG") + "</sub>";
-    angleModeBtn.dataset.value = calculator.angleMode === "DEG" ? "deg" : "red";
-})
-
 // show the input and set into the calculator expression
 const input = document.getElementById('displayArea-input');
 const previousExpression = document.getElementById('previousExpression')
@@ -21,7 +13,6 @@ btns.forEach(btn => {
         const button = e.currentTarget
         if(!button) 
             return;
-
         const value = button.dataset.value;
         handleInput(value)
     })
@@ -41,6 +32,12 @@ function handleInput(value){
         previousExpression.textContent = calculator.expression
         calculator.calculate();
         calculator.setExpression(calculator.result);
+    }
+    else if(value === 'deg' || value === 'rad'){
+        const angleModeBtn = document.getElementById('angleMode');
+        calculator.toggleAngleMode();
+        angleModeBtn.innerHTML = calculator.angleMode + "<sub>" + (calculator.angleMode === "DEG" ? "/RAD" : "/DEG") + "</sub>";
+        angleModeBtn.dataset.value = calculator.angleMode === "DEG" ? "deg" : "rad";
     }
     else {
         if((calculator.expression === '0' && value !== '.') || calculator.expression === 'Error')
