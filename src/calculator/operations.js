@@ -74,7 +74,8 @@ const functions = {
         arity: 1,
         execute: function (a, mode) {
             let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
-            return Math.sin(angle) // in radians
+            let sinVal = Math.sin(angle) // in radians
+            return (sinVal > -1e-7 && sinVal < 1e-7) ? 0 : sinVal;
         }
     },
     'cos':{
@@ -83,7 +84,8 @@ const functions = {
         arity: 1,
         execute: function (a, mode) {
             let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
-            return Math.cos(angle) // in radians
+            let cosVal = Math.cos(angle) // in radians
+            return (cosVal > -1e-7 && cosVal < 1e-7) ? 0 : cosVal;
         }
     },
     'tan':{
@@ -93,7 +95,7 @@ const functions = {
         execute: function (a, mode) {
             let angle = (mode === 'DEG') ? (a*constants['π'].value/180) : a;
             let cosVal = Math.cos(angle);
-            if(cosVal < 1e-10)
+            if(cosVal > -1e-7 && cosVal < 1e-7)
                 showError('tan value goes infinte')
             return Math.tan(angle) // in radians
         }
