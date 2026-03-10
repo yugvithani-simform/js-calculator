@@ -46,7 +46,8 @@ function handleInput(value){
             updateExpression('')
             calculator.hasError=false;
         }
-        updateExpression(calculator.expression + `${Number(calculator.result).toFixed(precision)}`)
+        updateExpression(calculator.expression + `${resultNumber(calculator.result)}`)
+        console.log(typeof calculator.result)
     }
     else {
         if(calculator.expression === '0' && value==='00')
@@ -67,6 +68,11 @@ function render(){
 
 function updateExpression(exp) {
     calculator.expression = exp;
-    input.value = Number(exp).toFixed(precision);
+    input.value = resultNumber(exp);
     input.scrollLeft = input.scrollWidth;
+}
+
+function resultNumber(val){
+    let str = `${val}`
+    return str.includes('.') ? Number(str).toFixed(precision) : Number(str);
 }
