@@ -8,15 +8,33 @@ const input = document.getElementById('displayArea-input');
 const previousExpression = document.getElementById('previousExpression')
 const btns = Array.from(document.getElementsByClassName('btn'));
 
+// logic for click by the mouse
 btns.forEach(btn => {
     btn.addEventListener('click', function (e) {
-        console.log(e.currentTarget.dataset.value)
         const button = e.currentTarget
         if(!button) 
             return;
         const value = button.dataset.value;
         handleInput(value)
     })
+})
+
+// Logic for the key press through keyboard
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(/^[+\-*/0-9%^!%()]/.test(key)){ // error
+        handleInput(key)
+    }
+    else if(key === "Backspace"){
+        handleInput('DEL')
+    }
+    else if(key === "Enter"){
+        handleInput('=')
+    }
+    else if(key === 'c' || key === 'C'){
+        handleInput('CE')
+    }
+    return;
 })
 
 function handleInput(value){
@@ -46,7 +64,8 @@ function handleInput(value){
             updateExpression('')
             calculator.hasError=false;
         }
-        updateExpression(calculator.expression + `${Number(calculator.result).toFixed(precision)}`)
+        updateExpression(calculator.expression + `${Number(Number(calculator.result).toFixed(precision))}`)
+        console.log(typeof calculator.result)
     }
     else {
         if(calculator.expression === '0' && value==='00')
@@ -67,6 +86,6 @@ function render(){
 
 function updateExpression(exp) {
     calculator.expression = exp;
-    input.value = Number(exp).toFixed(precision);
+    input.value = Number(Number(exp).toFixed(precision));
     input.scrollLeft = input.scrollWidth;
 }
