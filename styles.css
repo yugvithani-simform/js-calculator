@@ -101,3 +101,10 @@ body{
 .calc-btns button:hover{
     transform: scale(1.05);
 }
+
+.footer{
+    text-align: center;
+    color: rgb(168, 168, 168);
+    font-size: 75%;
+    margin: 5px;
+}

@@ -8,6 +8,7 @@ const input = document.getElementById('displayArea-input');
 const previousExpression = document.getElementById('previousExpression')
 const btns = Array.from(document.getElementsByClassName('btn'));
 
+// logic for click by the mouse
 btns.forEach(btn => {
     btn.addEventListener('click', function (e) {
         const button = e.currentTarget
@@ -16,6 +17,24 @@ btns.forEach(btn => {
         const value = button.dataset.value;
         handleInput(value)
     })
+})
+
+// Logic for the key press through keyboard
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if(/^[+\-*/0-9%^!%()]/.test(key)){ // error
+        handleInput(key)
+    }
+    else if(key === "Backspace"){
+        handleInput('DEL')
+    }
+    else if(key === "Enter"){
+        handleInput('=')
+    }
+    else if(key === 'c' || key === 'C'){
+        handleInput('CE')
+    }
+    return;
 })
 
 function handleInput(value){
