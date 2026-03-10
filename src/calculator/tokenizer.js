@@ -21,7 +21,7 @@ export default function tokenizer(exp){
             }
         }
         else if(exp[i] === '!' || exp[i] === '√'){
-            currentInput += functions[exp[i++]].tokenString;
+            currentInput += exp[i++];
         }
         else if(isOperator(exp[i])){
             // unary operator handler
@@ -59,7 +59,7 @@ export default function tokenizer(exp){
                 bracketCount--;
             }
 
-            currentInput += operators[exp[i++]].tokenString
+            currentInput += exp[i++]
         }
         //handle implicit multiplication
         let lastToken = tokens.length > 0 ? tokens[tokens.length-1] : null;
@@ -67,21 +67,21 @@ export default function tokenizer(exp){
         (lastToken && 
             (
                 ([
-                    operators[')'].tokenString,
-                    functions['!'].tokenString,
+                    ')',
+                    '!',
                 ].includes(lastToken)) ||
                 !(isNaN(lastToken)) ||
                 (Object.values(constants).some(x => `${x.value}` === lastToken))
             ) &&
             (
                 ([
-                    operators['('].tokenString,
-                    functions['sin'].tokenString,
-                    functions['cos'].tokenString,
-                    functions['tan'].tokenString,
-                    functions['log'].tokenString,
-                    functions['ln'].tokenString,
-                    functions['√'].tokenString
+                    '(',
+                    'sin',
+                    'cos',
+                    'tan',
+                    'log',
+                    'ln',
+                    '√'
                 ].includes(currentInput)) ||
                 (Object.values(constants).some(x => `${x.value}` === currentInput))
             )

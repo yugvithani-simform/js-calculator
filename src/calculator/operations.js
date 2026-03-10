@@ -1,5 +1,4 @@
 import { showError } from "../utils/showError.js"
-import tokenizer from "./tokenizer.js";
 
 const constants = {
     'π':{
@@ -12,54 +11,45 @@ const constants = {
 
 const operators = {
     '+':{
-        tokenString: '+',
         precedence: 5,
         arity: 2,
         execute: (a,b) => a+b 
     },
     '-':{
-        tokenString: '-',
         precedence: 5,
         arity: 2,
         execute: (a,b) => a-b
     },
     '*':{
-        tokenString: '*',
         precedence: 6,
         arity: 2,
         execute: (a,b) => a*b
     },
     '/':{
-        tokenString: '/',
         precedence: 6,
         arity: 2,
         execute: (a,b) => b==0 ? showError("Can't devide by zero") : a/b
     },
     '%':{
-        tokenString: '%',
         precedence: 6,
         arity: 2,
         execute: (a,b) => a%b
     },
     '^':{
-        tokenString: '^',
         precedence: 8,
         arity: 2,
         execute: (a,b) => Math.pow(a, b)
     },
     '(':{
-        tokenString: '(',
         precedence: 1
     },
     ')':{
-        tokenString: ')',
         precedence: 1
     }
 }
 
 const functions = {
     'sin':{
-        tokenString: 'sin',
         precedence: 10,
         arity: 1,
         execute: function (a, mode) {
@@ -69,7 +59,6 @@ const functions = {
         }
     },
     'cos':{
-        tokenString: 'cos',
         precedence: 10,
         arity: 1,
         execute: function (a, mode) {
@@ -79,7 +68,6 @@ const functions = {
         }
     },
     'tan':{
-        tokenString: 'tan',
         precedence: 10,
         arity: 1,
         execute: function (a, mode) {
@@ -91,7 +79,6 @@ const functions = {
         }
     },
     'log':{
-        tokenString: 'log',
         precedence: 10,
         arity: 1,
         execute: function (a) {
@@ -101,7 +88,6 @@ const functions = {
         }
     },
     'ln':{
-        tokenString: 'ln',
         precedence: 10,
         arity: 1,
         execute: function (a) {
@@ -111,10 +97,9 @@ const functions = {
         }
     },
     '!':{
-        tokenString: '!',
         precedence: 9,
         arity: 1,
-        execute: (a) => {
+        execute: function (a) {
             if((Math.floor(a) !== a) || a<=0)
                 showError('Please enter the natural number')
             let fact = 1;
@@ -125,23 +110,12 @@ const functions = {
         }
     },
     '√':{
-        tokenString: '√',
         precedence: 10,
         arity: 1,
-        execute: (a) => {
+        execute: function (a) {
             if(a<0)
                 showError('please enter the valid number')
             return Math.sqrt(a);
-        }
-    },
-    'INV':{
-        tokenString: 'INV',
-        arity: 1,
-        precedence: 10,
-        execute: (a) => {
-            if(a===0)
-                showError("can't divide by zero")
-            return 1/a;
         }
     }
 }
