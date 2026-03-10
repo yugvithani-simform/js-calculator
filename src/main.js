@@ -47,6 +47,8 @@ function handleInput(value){
         updateExpression(calculator.expression + `${calculator.result}`)
     }
     else {
+        if(calculator.expression === '0' && value==='00')
+            return;
         if((calculator.expression === '0' && value !== '.') || calculator.hasError){
             updateExpression('')
             calculator.hasError=false;

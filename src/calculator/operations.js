@@ -58,22 +58,6 @@ const operators = {
 }
 
 const functions = {
-    '+/-':{
-        tokenString: 'swapSign',
-        precedence: 4,
-        arity: 1,
-        execute: function (a){
-            return -a;
-        }
-    },
-    '-':{
-        tokenString: 'u-',
-        precedence: 7
-    },
-    '+':{
-        tokenString: 'u+',
-        precedence: 7
-    },
     'sin':{
         tokenString: 'sin',
         precedence: 10,
