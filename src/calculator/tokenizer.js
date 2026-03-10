@@ -20,16 +20,16 @@ export default function tokenizer(exp){
                 currentInput += exp[i++];
             }
         }
-        else if(exp[i] === '!'){
+        else if(exp[i] === '!' || exp[i] === '√'){
             currentInput += functions[exp[i++]].tokenString;
         }
         else if(isOperator(exp[i])){
             // unary operator handler
             let lastToken = tokens.length > 0 ? tokens[tokens.length-1] : null;
             let isUnary = ((exp[i] === '-' || exp[i] === '+') &&        // check current expression is the unary or not
-            (
-                !tokens.length ||       // in starting       
-                    isOperator(lastToken) ||        // lastToken is operator
+                (
+                    !tokens.length ||       // in starting       
+                    (lastToken!==')' && isOperator(lastToken)) ||        // lastToken is operator
                     (lastToken === '(')     // lastToken is '('
                 )
             );

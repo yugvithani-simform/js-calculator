@@ -17,7 +17,7 @@ export default function postfix(tokens){
         else{
             let curr = operators[token] ?? functions[token];
             let top = operators[temp[temp.length-1]] ?? functions[temp[temp.length-1]] ?? {precedence: -1};
-            while(temp.length && top.precedence >= curr.precedence && token!=='^'){
+            while(temp.length && top.precedence >= curr.precedence && token!=='^' && token!=='√'){
                 stack.push(temp.pop());
                 top = operators[temp[temp.length-1]] ?? functions[temp[temp.length-1]] ?? {precedence: -1};
             }
