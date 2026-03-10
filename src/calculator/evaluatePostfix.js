@@ -1,3 +1,4 @@
+import { showError } from "../utils/showError.js";
 import Stack from "../utils/stack.js";
 import { operators, functions } from "./operations.js";
 
@@ -21,5 +22,7 @@ export default function evaluatePostfix(stack, angleMode){
             }
         }
     }
+    if(['undefined', 'NaN', 'null'].includes(outputStack.peek()))
+        showError("Error")
     return outputStack.pop();
 }

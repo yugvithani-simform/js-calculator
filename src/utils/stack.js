@@ -9,14 +9,14 @@ export default class Stack{
 
     pop(){
         if(this.#arr.length === 0)
-            showError('stack is empty')
+            showError('Error')
         let res = this.#arr.pop();
         return res;
     }
 
     peek(){
         if(this.#arr.length === 0)
-            showError('stack is empty')
+            showError('Error')
         let res = this.#arr.at(this.#arr.length - 1);
         return res;
     }
