@@ -10,7 +10,6 @@ const btns = Array.from(document.getElementsByClassName('btn'));
 
 btns.forEach(btn => {
     btn.addEventListener('click', function (e) {
-        console.log(e.currentTarget.dataset.value)
         const button = e.currentTarget
         if(!button) 
             return;
@@ -46,7 +45,7 @@ function handleInput(value){
             updateExpression('')
             calculator.hasError=false;
         }
-        updateExpression(calculator.expression + `${resultNumber(calculator.result)}`)
+        updateExpression(calculator.expression + `${Number(Number(calculator.result).toFixed(precision))}`)
         console.log(typeof calculator.result)
     }
     else {
@@ -68,11 +67,6 @@ function render(){
 
 function updateExpression(exp) {
     calculator.expression = exp;
-    input.value = resultNumber(exp);
+    input.value = Number(Number(exp).toFixed(precision));
     input.scrollLeft = input.scrollWidth;
-}
-
-function resultNumber(val){
-    let str = `${val}`
-    return str.includes('.') ? Number(str).toFixed(precision) : Number(str);
 }
