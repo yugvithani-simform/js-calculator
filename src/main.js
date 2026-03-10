@@ -1,6 +1,7 @@
 import Calculator from "./calculator/calculator.js";
 
 const calculator = new Calculator();
+const precision = 3;
 
 // show the input and set into the calculator expression
 const input = document.getElementById('displayArea-input');
@@ -32,6 +33,7 @@ function handleInput(value){
         previousExpression.textContent = calculator.expression
         calculator.calculate();
         updateExpression(calculator.expression);
+        return;
     }
     else if(value === 'deg' || value === 'rad'){
         const angleModeBtn = document.getElementById('angleMode');
@@ -44,7 +46,7 @@ function handleInput(value){
             updateExpression('')
             calculator.hasError=false;
         }
-        updateExpression(calculator.expression + `${calculator.result}`)
+        updateExpression(calculator.expression + `${Number(calculator.result).toFixed(precision)}`)
     }
     else {
         if(calculator.expression === '0' && value==='00')
@@ -65,5 +67,6 @@ function render(){
 
 function updateExpression(exp) {
     calculator.expression = exp;
-    document.getElementById('displayArea-input').value = exp;
+    input.value = Number(exp).toFixed(precision);
+    input.scrollLeft = input.scrollWidth;
 }
