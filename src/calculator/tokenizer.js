@@ -63,25 +63,32 @@ export default function tokenizer(exp){
         }
         //handle implicit multiplication
         let lastToken = tokens.length > 0 ? tokens[tokens.length-1] : null;
-        let implicitMultiplication = lastToken && (
-            ([
-                operators[')'].tokenString,
-                functions['!'].tokenString,
-            ].includes(lastToken)) ||
-            !(isNaN(lastToken)) ||
-            (Object.values(constants).some(x => `${x.value}` === lastToken))
-        ) &&
+        let implicitMultiplication = 
+        (lastToken && 
+            (
+                ([
+                    operators[')'].tokenString,
+                    functions['!'].tokenString,
+                ].includes(lastToken)) ||
+                !(isNaN(lastToken)) ||
+                (Object.values(constants).some(x => `${x.value}` === lastToken))
+            ) &&
+            (
+                ([
+                    operators['('].tokenString,
+                    functions['sin'].tokenString,
+                    functions['cos'].tokenString,
+                    functions['tan'].tokenString,
+                    functions['log'].tokenString,
+                    functions['ln'].tokenString,
+                    functions['√'].tokenString
+                ].includes(currentInput)) ||
+                (Object.values(constants).some(x => `${x.value}` === currentInput))
+            )
+        ) ||
         (
-            ([
-                operators['('].tokenString,
-                functions['sin'].tokenString,
-                functions['cos'].tokenString,
-                functions['tan'].tokenString,
-                functions['log'].tokenString,
-                functions['ln'].tokenString,
-                functions['√'].tokenString
-            ].includes(currentInput)) ||
-            (Object.values(constants).some(x => `${x.value}` === currentInput))
+            lastToken === ')' &&
+            isDigit(currentInput[0])
         );
         if(lastToken && implicitMultiplication){
             tokens.push('*');
